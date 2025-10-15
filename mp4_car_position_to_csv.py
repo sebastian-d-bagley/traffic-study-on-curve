@@ -1,4 +1,5 @@
 # This script processes all the video files in the folder, detects cars using the YOLO detection model, and saves the detected car positions to a CSV file.
+# This is the first step once all video files are in the main data folder.
 
 import os
 import glob
@@ -149,6 +150,7 @@ def process_videos_in_folder(folder_path, output_csv):
 
 
 if __name__ == "__main__":
-    folder_with_videos = r"full_footage"
+    folder_with_videos = r"Full Footage"
     output_csv_path = "car_tracking_data_all.csv"
     process_videos_in_folder(folder_with_videos, output_csv=output_csv_path)
+
