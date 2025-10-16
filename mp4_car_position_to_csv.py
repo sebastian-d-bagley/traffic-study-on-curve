@@ -151,7 +151,8 @@ def process_videos_in_folder(folder_path, output_csv):
 
 if __name__ == "__main__":
     folder_with_videos = r"Full Footage"
-    output_csv_path = "car_tracking_data.csv"
+    output_csv_path = "Intermediate CSVs/car_tracking_data.csv"
     process_videos_in_folder(folder_with_videos, output_csv=output_csv_path)
+
 
 
