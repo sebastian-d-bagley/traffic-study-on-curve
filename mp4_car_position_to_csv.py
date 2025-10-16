@@ -76,7 +76,7 @@ def process_videos_in_folder(folder_path, output_csv):
                     class_id = np.argmax(scores)
                     confidence = scores[class_id]
 
-                    if classes[class_id] == "car" and confidence > 0.5:
+                    if classes[class_id] == "car" and confidence > 0.8:
                         center_x, center_y, w, h = (
                             detection[0:4] * np.array([width, height, width, height])
                         ).astype("int")
@@ -88,11 +88,15 @@ def process_videos_in_folder(folder_path, output_csv):
                         confidences.append(float(confidence))
                         class_ids.append(class_id)
 
-            indices = cv2.dnn.NMSBoxes(boxes, confidences, 0.5, 0.4)
+            indices = cv2.dnn.NMSBoxes(boxes, confidences, 0.8, 0.4)
 
             # Check if we actually detected any cars
             car_detected = (len(indices) > 0)
 
+            if len(indices) > 1:
+                print("Multiple cars detected. Breaking.")
+                break
+            
             # If a car is detected, lookg through every frame
             if car_detected:
                 current_skip = 1
@@ -153,6 +157,7 @@ if __name__ == "__main__":
     folder_with_videos = r"Full Footage"
     output_csv_path = "Intermediate CSVs/car_tracking_data.csv"
     process_videos_in_folder(folder_with_videos, output_csv=output_csv_path)
+
 
 
 
